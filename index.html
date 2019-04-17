@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Scholarly HTML — Markedly Smart</title>
+  <link rel="stylesheet" href="resources/css/scholarly.css">
+  <link rel="stylesheet" href="node_modules/prismjs/themes/prism-coy.css">
+  <script src="resources/js/scholarly.js" defer></script>
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+  <header>
+    <p class="title">N.T.T.P.</p>
+    <p class="subtitle">Not This Time Pal</p>
+  </header>
+  <article id="what" typeof="schema:ScholarlyArticle" resource="#">
+    <h1>Not This Time Pal</h1>
+    <section>
+      <ol>
+        <li property="schema:author" typeof="sa:ContributorRole">
+          <a property="schema:author" href="https://github.com/ronesim" typeof="schema:Person">
+            <span property="schema:givenName">Robert</span>
+            <span property="schema:familyName">Onesim</span>
+          </a>
+        </li>
+      </ol>
+      <ol>
+        <li id="institution">
+          <a href="https://notthistimepal.com" typeof="schema:Corporation">
+            <span property="schema:name">"Not This Time Pal"</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <section typeof="sa:Abstract" id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        A browser extension that compares products (price, shipping rates and times, specs, rating) via reverse image
+        search.
+        You can go on any website (e-commerce, social media) and with 1 click on any product image, we show you where
+        you can
+        find better deals for the exact same item. We also crowdsource information from users who have purchased items
+        on the
+        website you're browsing and warn you if the site is fake, made to steal credit card information, didn't respect
+        return
+        policies or has huge mark-ups.
+      </p>
+    </section>
+    <section typeof="sa:MaterialsAndMethods" id="motivation">
+      <h2>Motivation</h2>
+      <p>
+        Nowadays, everyone is betting on dropshipping and getting in on it (50% of e-commerce in 2018). Shopify's stock
+        is skyrocketing. But we think the way to make a serious impact and earn high returns is to bet against
+        conventional wisdom.
+        Many people have told us that dropshipping is legit because they create brands and people understand that they
+        pay a bit more because the products find them through ads that the dropshipper buys on social media.
+        But when you show someone that the exact same watch or dress they bought for 70$ is actually 5.95$(including
+        shipping) if you buy directly from the supplier, the answer I always get is "This is not branding, this is
+        bullshit!".
+        Put it another way high margins can only exist in situations of high informational asymmetry. Transparency is
+        the ultimate nightmare for unethical vendors. And that's our mantra "Let's keep e-commerce honest!".
+      </p>
+    </section>
+    <section typeof="sa:Results" id="architecture">
+      <h2>Design</h2>
+      <p>
+        In the first section we briefly described the main goals of the application and now we are going to focus
+        on describing the ideas/concepts, including design patterns, sketches, storyboards and wireframes.
+        Design patterns used:
+        <ul>
+          <li>Extras on demand - used for displaying results</li>
+          <li>Hub and spoke - used for spliting home actions, profile and store</li>
+          <li>Modal panel - used for different types of actions like delete and review result</li>
+        </ul>
+        Visual design patterns:
+        <ul>
+          <li>Inline forms and validation</li>
+          <li>Notifications</li>
+          <li>Bottom navigation and app bar</li>
+          <li>Widget</li>
+          <li>Cards</li>
+          <li>Lists</li>
+          <li>Favorites</li>
+          <li>Infinite scroll</li>
+          <li>Badges</li>
+        </ul>
+      </p>
+
+      <section id="first-idea">
+        <h3>First idea</h3>
+        <p>
+          The first idea is to implement a chrome extension that is going to work on every website. It is very useful to
+          have this because
+          users do not want to leave the active tab while they are shopping, in order to check for a product.
+          There are 2 main actions: search a product and report a product.</p>
+        <figure typeof="sa:Image">
+          <img src="design/sketches-3.jpg" width="880" height="655">
+          <figcaption>
+            Sketche 1: While user is shopping, he can use NTTP chrome extension in order to search or report a product.
+          </figcaption>
+        </figure>
+        In order to verify a product the user should follow these steps:
+        <ul>
+          <li>Install and open the extension</li>
+          <li>Sign-up/sign-in using Google or email</li>
+          <li>Activate tool from the main action tab</li>
+          <li>Click on a product image and wait a few seconds</li>
+          <li>Inspect the results</li>
+        </ul>
+        <figure typeof="sa:Image">
+          <img src="design/storyboards-1.jpg" width="880" height="655">
+          <figcaption>
+            Storyboard 1: Search product flow.
+          </figcaption>
+        </figure>
+        <figure typeof="sa:Image">
+          <img src="design/sketches-1-2.jpg" width="880" height="655">
+          <figcaption>
+            Sketche 2: Top line represents the sketches for searching a product. Bottom line represents the sketches for
+            reporting a product.
+          </figcaption>
+        </figure>
+      </section>
+      <section id="second-idea">
+        <h3>Second idea</h3>
+        <p>
+          The second idea is to implement a widget, which is included in the chrome extension, in order to display the
+          reports/reviews for a vendor/product.
+          Users can view an overall score for each vendor and all the reviews for a specific product so they can take
+          decisions based on this feedback. In addition,
+          they can report products in order to help other users to avoid scams and fraud. </p>
+        <figure typeof="sa:Image">
+          <img src="design/storyboards-3.jpg" width="880" height="655">
+          <figcaption>
+            Storyboard 2: Users can avoid scams and fraud using crowdsourcing.
+          </figcaption>
+        </figure>
+        In order to avoid a scam/fraud the user should follow these steps:
+        <ul>
+          <li>Install and open the extension</li>
+          <li>Sign-up/sign-in using Google or email</li>
+          <li>Go to an e-commerce website</li>
+          <li>Report products in order to help others</li>
+        </ul>
+        <figure typeof="sa:Image">
+          <img src="design/sketches-1-2.jpg" width="880" height="655">
+          <figcaption>
+            Sketche 2: Top line represents the sketches for searching a product. Bottom line represents the sketches for
+            reporting a product.
+          </figcaption>
+        </figure>
+      </section>
+      <section id="third-idea">
+        <h3>Third idea</h3>
+        <p>
+          The last idea is to build a mobile app that allows people to search for products and find better alternatives.
+          This idea might be a bit tricky
+          because mobile browsers does not support extensions. The only alternative is to allow user to upload a
+          screenshot of the product image in our app.
+        </p>
+        <figure typeof="sa:Image">
+          <img src="design/storyboards-2.jpg" width="880" height="655">
+          <figcaption>
+            Storyboard 3: Mobile app flow.
+          </figcaption>
+        </figure>
+        <figure typeof="sa:Image">
+          <img src="design/sketches-4.jpg" width="880" height="655">
+          <figcaption>
+            Sketche 3: Search a product using mobile app.
+          </figcaption>
+        </figure>
+      </section>
+    </section>
+
+    <section typeof="sa:MaterialsAndMethods" id="qoc">
+      <h2>QOC</h2>
+      <table>
+        <tr>
+          <th>Application type</th>
+          <th>Chrome extension</th>
+          <th>Web App</th>
+          <th>Mobile app</th>
+        </tr>
+        <tr>
+          <td>Usability</td>
+          <td>10</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Ease of implementation</td>
+          <td>8</td>
+          <td>10</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>10</td>
+          <td>7</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>28</td>
+          <td>24</td>
+          <td>23</td>
+        </tr>
+      </table>
+      <p>We have chosen to implement the chrome extension because it is very easy to use (users do not have to leave
+        their current page) and it is very fast (has access to the DOM).
+        Regarding implementation, all the methods needs a web server but web apps are much easier to implement because
+        there are a lots of frameworks and tutorials.
+      </p><br />
+      <table>
+        <tr>
+          <th>How to get image</th>
+          <th>Select</th>
+          <th>Crop</th>
+          <th>Upload</th>
+        </tr>
+        <tr>
+          <td>Usability</td>
+          <td>10</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>Ease of implementation</td>
+          <td>10</td>
+          <td>8</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>9</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>Availability</td>
+          <td>8</td>
+          <td>10</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>37</td>
+          <td>33</td>
+          <td>37</td>
+        </tr>
+      </table>
+      <p>We have chosen to implement the selection mode firstly because it is much intuitive and convenient for users.
+        Having the chrome extension is very easy to get
+        the image from the DOM and to process it in the server.
+      </p><br />
+      <table>
+        <tr>
+          <th>Report type</th>
+          <th>Like/dislike buttons</th>
+          <th>Input field</th>
+          <th>Stars</th>
+        </tr>
+        <tr>
+          <td>Usability</td>
+          <td>10</td>
+          <td>7</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Ease of implementation</td>
+          <td>10</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>10</td>
+          <td>10</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>30</td>
+          <td>26</td>
+          <td>29</td>
+        </tr>
+      </table>
+      <p>We have chosen to implement the like/dislike review system because it is the easiest one. In the future we are
+        going to add the input fields for more complex reviews.
+      </p><br />
+    </section>
+    <section typeof="sa:Development" id="development">
+      <h2>Development</h2>
+      <p>
+        What have we already accomplished:
+        <ul>
+          <li>Implemented the chrome extension including the main panel and the widget</li>
+          <li>Implemented the web server that gets the product image and returns alternatives</li>
+          <li>Launched a public beta - got 50 user</li>
+        </ul>
+      </p>
+    </section>
+    <section typeof="sa:Branding" id="branding">
+        <h2>Branding</h2>
+        <h3>Our mission is: <strong>Let's keep e-commerce honest!</strong></h3>
+        <h3>Marketing: <a href="https://www.youtube.com/watch?v=35ZY10JZC8o"> Intro</a></h3>
+        <figure typeof="sa:Image">
+            <img src="design/logo.jpg" width="200" height="200">
+            <figcaption>
+              Not This Time Pal logo
+            </figcaption>
+        </figure>
+      </section>
+    <section typeof="sa:Conclusion" id="conclusion">
+      <h3>Conclusions</h3>
+      <p>
+        To sum up, Not This Time Pal aims to help users shop safely and informed online.
+        With only one click on product image you can detect scams, couteirfeit or better deals.
+      </p>
+    </section>
+    <section typeof="sa:ReferenceList" id="references">
+      <h2>References</h2>
+      <dl>
+        <dd id="ref-sa-ontology" typeof="schema:ScholarlyArticle"
+          resource="https://profs.info.uaic.ro/~busaco/teach/courses/hci/hci-film.html">
+          <cite property="schema:name"><a
+              href="https://profs.info.uaic.ro/~busaco/teach/courses/hci/hci-film.html">Human-Computer Interaction
+              Courses</a></cite>,
+        </dd>
+
+        <dd id="ref-sa-ontology" typeof="schema:ScholarlyArticle" resource="http://pxdotpt.com/hci">
+          <cite property="schema:name"><a href="http://pxdotpt.com/hci">Design patterns, QOC, Sketches</a></cite>,
+        </dd>
+      </dl>
+    </section>
+  </article>
+  <footer>
+    <p>
+      <a href="https://github.com/vlupoaie/scira">Contribute</a>
+      •
+      Copyright ©2019 Not This Time Pal
+    </p>
+  </footer>
+</body>
+
+</html>
