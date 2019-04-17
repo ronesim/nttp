@@ -1,6 +1,6 @@
 # Not This Time Pal - Human-Computer Interaction project
 
-Scholarly HTML: https://vlupoaie.github.io/scira/
+Scholarly HTML: https://ronesim.github.io/nttp/
 
 Demo: https://www.youtube.com/watch?v=35ZY10JZC8o
 
