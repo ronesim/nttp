@@ -313,14 +313,108 @@
     </section>
     <section typeof="sa:Development" id="development">
       <h2>Development</h2>
+      <p>In this section, we will provide a high-level overview of how the whole system works, describing the
+        client-server architecture pictured in Figure 1.</p>
+      <figure typeof="sa:Image">
+        <img src="design/architecture.png" width="880" height="655">
+        <figcaption>
+          Figure 1: Not This Time Pal architecture.
+        </figcaption>
+      </figure>
+      <p>N.T.T.P is mainly a serverless application because the chrome extension (client) is
+        interacting directly with Google Cloud Firestore database using its back-end services.This means that our app
+        can read and write directly from Cloud Firestore, by using Firebase's JavaScript SDK for that.
+        We use Firebase's server-side security rules to control what data each user can read and modify in the database.
+      </p>
       <p>
-        What have we already accomplished:
         <ul>
-          <li>Implemented the chrome extension including the main panel and the widget</li>
-          <li>Implemented the web server that gets the product image and returns alternatives</li>
-          <li>Launched a public beta - got 50 user</li>
+          <li><b>Chrome extension</b> represents the client side of the system. It works as a single-page application
+            which is injected into the DOM in an isolated environment.
+            Basically, we created a React App inside of a shadow-dom: the background script works as a Redux store,
+            keeping the state of the application while the content-script
+            is used to display the UI components.
+            <ul>
+              <li><b>Authentication system</b>: Google Firebase Auth is used to allow users to sign up and sign in. We
+                provide them 2 different methods: using their Google account or based on their email address.</li>
+              <li>
+                <b>Search product</b>: when the user clicks on a product image, we parse the target node and extract all
+                the images (from html tags or CSS). If there
+                is more than one image, we allow the user to select which one he/she wants to search for. Then, we
+                send the image URL to the server and get the results. Finally, we process those results and display
+                them to the user.
+              </li>
+              <li><b>Report product</b>: We implemented a widget that displays the reports/reviews for a vendor/product.
+                Users can view an overall score for each vendor and all the reviews for a specific product so they can
+                take decisions based on this feedback. In addition, they can report products in order to help other
+                users to avoid scams and fraud. We use Google Firestore database to store all this information.</li>
+            </ul>
+          <li><b>Server</b>: exposes one main API endpoint corresponding to the main controller component
+            (SearchController).
+            When the server receives a request from the client, the controller processes it and passes the image URL to
+            the WebDetection component.
+            'WebDetection' is using Google Vision API to get a list of web pages (URLs) where the product might be
+            found. Then,
+            all the fetched URLs are parsed in order to extract product id for each vendor. Finally, we use vendor APIs
+            and web-scraping to extract product details (price, title, description, shipping time).
+          </li>
+        </ul>
+        <b>Technologies</b>
+        <ul>
+          <li><b>Front-end</b>: React, Redux, Material-ui, HTML, CSS, JavaScript </li>
+          <li><b>Back-end</b>: Google Cloud App Engine, Firestore, Vision API, Firebase Auth, Cloud Functions, Spring
+            Boot, Java, Python</li>
         </ul>
       </p>
+
+    </section>
+
+    <section typeof="sa:Guide" id="user-guide">
+      <h2>User-guide</h2>
+      <figure typeof="sa:Image">
+        <img src="images/login.png" width="200" height="200">
+        <figcaption>
+          User is doing some online shopping. User installs the N.T.T.P extension and opens it. User must
+          sign-up/sign-in using Google or Email.
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/open.png" width="200" height="200">
+        <figcaption>
+          User wants to verify a product. He opens the extension and selects 'Search product' from the 'Actions' tab.
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/click.png" width="200" height="200">
+        <figcaption>
+          User clicks on the product image and waits for the results.
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/results.png" width="200" height="200">
+        <figcaption>
+          Results are displayed in the 'Results' tab. User can view all the alternatives for the searched product.
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/result.png" width="200" height="200">
+        <figcaption>
+          With just one click on any result, user gets to the product page. User can review the results to help us
+          improving the system.
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/enable.png" width="200" height="200">
+        <figcaption>
+          User finds a new online store in which he does not trust. User enables the safe shopping mode from the account
+          tab. Using the widget, the user can see an overall score for that vendor and all the reviews/reports from other users. 
+        </figcaption>
+      </figure>
+      <figure typeof="sa:Image">
+        <img src="images/report.png" width="200" height="200">
+        <figcaption>
+          User can report a product/vendor in order to help other people avoiding potential scams/fraud.
+        </figcaption>
+      </figure>
     </section>
     <section typeof="sa:Branding" id="branding">
       <h2>Branding</h2>
@@ -337,7 +431,7 @@
       <h3>Conclusions</h3>
       <p>
         To sum up, Not This Time Pal aims to help users shop safely and informed online.
-        With only one click on product image you can detect scams, couteirfeit or better deals.
+        With only one click on product image you can detect scams, couterfeit or better deals.
       </p>
     </section>
     <section typeof="sa:ReferenceList" id="references">
